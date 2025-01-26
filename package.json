@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
-    "mock": "npx json-server src/mock/db.json",
+    "mock": "npx json-server src/mocks/db.json",
     "preview": "vite preview",
     "build-only": "vite build",
     "type-check": "vue-tsc --build",
