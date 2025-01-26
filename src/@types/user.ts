@@ -3,7 +3,6 @@ export default interface User {
   name: string
   username: string
   email: string
-  avatarUrl: string | null
   createdAt: Date
   updatedAt: Date
 }

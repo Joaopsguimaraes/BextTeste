@@ -1,3 +1,4 @@
-import type User from './user'
+import type { z } from 'zod'
+import type { signupSchema } from '@/validations/signup-schema'
 
-export type SignupFields = Omit<User, 'id' | 'createdAt' | 'updatedAt'>
+export type SignupFields = z.infer<typeof signupSchema>
