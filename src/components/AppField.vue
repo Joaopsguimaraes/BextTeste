@@ -1,9 +1,8 @@
-<!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
 import { computed, provide } from 'vue'
 import { v4 as uuid } from 'uuid'
-import Label from './Label.vue'
-import ErrorMessage from './ErrorMessage.vue'
+import Label from './AppLabel.vue'
+import ErrorMessage from './AppErrorMessage.vue'
 
 const props = defineProps({
   id: {

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import Input from '@/components/ui/Input.vue'
-import Field from '@/components/ui/Field.vue'
-import Button from '@/components/ui/Button.vue'
+import Input from '@/components/AppInput.vue'
+import Field from '@/components/AppField.vue'
+import Button from '@/components/AppButton.vue'
 import { useRouter } from 'vue-router'
 import { UserService } from '@/helpers/user-service'
 import { useUserStore } from '@/stores/user'

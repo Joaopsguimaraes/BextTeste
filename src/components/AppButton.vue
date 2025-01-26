@@ -1,6 +1,5 @@
-<!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, type PropType } from 'vue'
 import { cva } from 'class-variance-authority'
 
 const props = defineProps({
@@ -13,7 +12,7 @@ const props = defineProps({
     default: 'button',
   },
   intent: {
-    type: String,
+    type: String as PropType<'primary' | 'secondary' | 'text'>,
     validator: (val: string) => ['primary', 'secondary', 'text'].includes(val),
     default: 'primary',
   },
