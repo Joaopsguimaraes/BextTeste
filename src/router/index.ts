@@ -26,6 +26,12 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/views/CreateTaskView.vue'),
     meta: { requiresAuth: true },
   },
+  {
+    path: '/task/edit/:id',
+    name: RoutesNames.TASK_EDIT,
+    component: () => import('@/views/EditTaskView.vue'),
+    meta: { requiresAuth: true },
+  },
 ]
 
 const router = createRouter({

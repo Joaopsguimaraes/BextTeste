@@ -1,11 +1,10 @@
-<!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
 import type { SelectOptionsType } from '@/types/select-options-type'
 import { inject, type PropType } from 'vue'
 
 const props = defineProps({
   id: String,
-  modelValue: [String, Number],
+  modelValue: [String, Number, null],
   required: Boolean,
   invalid: Boolean,
   options: {

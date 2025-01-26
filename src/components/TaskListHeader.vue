@@ -11,10 +11,10 @@ async function navigateToCreateTask() {
 }
 </script>
 <template>
-  <div class="w-full flex flex-col md:flex-row md:justify-between gap-2 items-center">
-    <span class="text-2xl font-medium text-blue-900">Gerenciamento de tarefas</span>
+  <div class="w-full p-10 flex flex-col md:flex-row md:justify-between gap-2 items-center">
+    <span class="text-2xl font-bold text-blue-900">Gerenciamento de tarefas</span>
     <div>
-      <Button @click="navigateToCreateTask" class="px-5">Cadastrar tarefa</Button>
+      <Button @click="navigateToCreateTask" class="px-5">Nova tarefa</Button>
     </div>
   </div>
 </template>

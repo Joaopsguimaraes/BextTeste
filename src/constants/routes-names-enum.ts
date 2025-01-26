@@ -3,4 +3,5 @@ export enum RoutesNames {
   SIGNIN = 'signin',
   SIGNUP = 'signup',
   TASK_CREATE = 'task-create',
+  TASK_EDIT = 'task-edit',
 }

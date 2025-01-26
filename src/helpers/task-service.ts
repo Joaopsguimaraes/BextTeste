@@ -26,4 +26,29 @@ export const TaskService = {
       throw error
     }
   },
+
+  async getTaskById(id: Task['id']): Promise<Task> {
+    try {
+      const { data } = await httpClient.get<Task>(`/tasks/${id}`)
+      return data
+    } catch (error) {
+      if (error instanceof ApiError) {
+        console.error(`API Error: ${error.message}`)
+      }
+      throw error
+    }
+  },
+
+  async updateTask(id: string, taskData: CreateTaskFields): Promise<Task> {
+    try {
+      const { data } = await httpClient.put<Task>(`/tasks/${id}`, taskData)
+
+      return data
+    } catch (error) {
+      if (error instanceof ApiError) {
+        console.error(`API Error: ${error.message}`)
+      }
+      throw error
+    }
+  },
 }

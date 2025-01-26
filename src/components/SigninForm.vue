@@ -63,7 +63,7 @@ async function handleRegister(): Promise<void> {
     </Field>
     <div class="w-full flex flex-col gap-2 items-center">
       <Button @click="onSubmit" class="w-full">Entrar</Button>
-      <Button @click="handleRegister" class="w-full" intent="secondary">Registra-se</Button>
+      <Button @click="handleRegister" class="w-full" variant="secondary">Registra-se</Button>
     </div>
   </SignContainer>
 </template>

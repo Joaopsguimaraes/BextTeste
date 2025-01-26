@@ -83,7 +83,7 @@ async function handleSignin(): Promise<void> {
     </Field>
     <div class="w-full flex flex-col gap-2 items-center">
       <Button @click="onSubmit" class="w-full" :loading="loading"> Registrar </Button>
-      <Button @click="handleSignin" class="w-full" intent="secondary" :loading="loading">
+      <Button @click="handleSignin" class="w-full" variant="secondary" :loading="loading">
         Entrar
       </Button>
     </div>

@@ -2,7 +2,7 @@ export interface Task {
   id: string
   title: string
   description: string | undefined
-  priority: string
+  priority: number
   finishAt: string | undefined
   category: number
 }

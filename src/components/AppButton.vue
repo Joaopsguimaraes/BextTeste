@@ -2,6 +2,8 @@
 import { computed, type PropType } from 'vue'
 import { cva } from 'class-variance-authority'
 
+export type ButtonVariants = 'primary' | 'secondary' | 'text'
+
 const props = defineProps({
   leftIcon: Object,
   rightIcon: Object,
@@ -11,8 +13,8 @@ const props = defineProps({
     type: [String, Object],
     default: 'button',
   },
-  intent: {
-    type: String as PropType<'primary' | 'secondary' | 'text'>,
+  variant: {
+    type: String as PropType<ButtonVariants>,
     validator: (val: string) => ['primary', 'secondary', 'text'].includes(val),
     default: 'primary',
   },
@@ -23,7 +25,7 @@ const buttonClass = computed(() => {
     'min-w-32 p-2 inline-flex gap-4 items-center justify-center rounded-lg cursor-pointer',
     {
       variants: {
-        intent: {
+        variant: {
           primary: 'bg-gray-900 hover:bg-gray-800 text-white',
           secondary: 'bg-none hover:bg-gray-100 text-gray-900 border border-gray-900',
           text: 'text-gray-900 hover:bg-gray-100',
@@ -34,7 +36,7 @@ const buttonClass = computed(() => {
       },
     },
   )({
-    intent: props.intent,
+    variant: props.variant,
     disabled: props.disabled,
   })
 })
