@@ -187,13 +187,13 @@ Link do Projeto: [https://github.com/Joaopsguimaraes/BextTeste](https://github.c
 
 ## 🎉 Aprendizados
 
-Utilização da Composition API em todo projeto.
-Utilização de Provide / Inject para fornecer valores para componentes descendentes
-Utilização do pinia, aprofundando em conhecimentos com a storage.
-Criação do auth guard para manter rotas privadas protegidas.
-Utilização da local storage para manter dados do usuário, mesmo caso a aplicação reinicie.
-Criação de componentes de formulário de forma reaproveitada em qualquer parte do projeto.
-Validação reativa com vee-validate e zod.
-Componentes reaproveitável como TaskForm sendo utilizado para criar e editar uma task.
-Criação e utilizações de hooks para deixar o componente mais limpo e a logica aplica nos hooks.
-Criação de helpers para serviços e utilitários também deixando o código mais limpo e estruturado.
+- Utilização da Composition API em todo projeto.
+- Utilização de Provide / Inject para fornecer valores para componentes descendentes
+- Utilização do pinia, aprofundando em conhecimentos com a storage.
+- Criação do auth guard para manter rotas privadas protegidas.
+- Utilização da local storage para manter dados do usuário, mesmo caso a aplicação reinicie.
+- Criação de componentes de formulário de forma reaproveitada em qualquer parte do projeto.
+- Validação reativa com vee-validate e zod.
+- Componentes reaproveitável como TaskForm sendo utilizado para criar e editar uma task.
+- Criação e utilizações de hooks para deixar o componente mais limpo e a logica aplica nos hooks.
+- Criação de helpers para serviços e utilitários também deixando o código mais limpo e estruturado.
