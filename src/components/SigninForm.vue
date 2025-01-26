@@ -2,68 +2,30 @@
 import Input from '@/components/AppInput.vue'
 import Field from '@/components/AppField.vue'
 import Button from '@/components/AppButton.vue'
-import { useRouter } from 'vue-router'
-import { UserService } from '@/helpers/user-service'
-import { useUserStore } from '@/stores/user'
-import { toTypedSchema } from '@vee-validate/zod'
-import { useForm, useField } from 'vee-validate'
-import { useToast } from 'vue-toastification'
-import type { SigninFields } from '@/types/signin-fields'
-import SignContainer from '../layouts/SignContainer.vue'
-import { signinSchema } from '@/validations/signin-schema'
-import { RoutesNames } from '@/constants/routes-names-enum'
+import SignContainer from '@/layouts/SignContainer.vue'
 
-const toast = useToast()
-const router = useRouter()
-const user = useUserStore()
-const validationSchema = toTypedSchema(signinSchema)
-const { handleSubmit, errors } = useForm({ validationSchema })
-const { value: email } = useField<string>('email')
-const { value: password } = useField<string>('password')
+import { useSignin } from '@/composables/useSignin'
+import { useSigninForm } from '@/composables/useSigninForm'
 
-async function validadeUser(values: SigninFields) {
-  const userSignin = await UserService.getUserByEmail(values.email)
+const { signin, navigateToSignup, loading } = useSignin()
 
-  if (!userSignin) {
-    throw new Error('Usuário não encontrado, favor registra-se')
-  }
+const { handleSubmit, errors, defineField } = useSigninForm(signin)
 
-  return userSignin
-}
-
-const onSubmit = handleSubmit(async (values: SigninFields) => {
-  try {
-    const userSignin = await validadeUser(values)
-
-    user.addUser(userSignin)
-    await router.push('/')
-  } catch (error) {
-    if (error instanceof Error) {
-      toast.error(error.message)
-    } else {
-      toast.error('Erro ao realizar cadastro')
-    }
-  }
-})
-
-async function handleRegister(): Promise<void> {
-  await router.push({
-    name: RoutesNames.SIGNUP,
-  })
-}
+const [email, emailProps] = defineField('email')
+const [password, passwordProps] = defineField('password')
 </script>
 
 <template>
   <SignContainer title="Bem vindo! Realize o login">
     <Field id="email" label="Email" required :error="errors.email">
-      <Input type="email" placeholder="Digite seu email..." v-model="email" />
+      <Input type="email" placeholder="Digite seu email..." v-model="email" v-bind="emailProps" />
     </Field>
     <Field id="password" label="Password" required :error="errors.password">
-      <Input type="password" placeholder="*********" v-model="password" />
+      <Input type="password" placeholder="*********" v-model="password" v-bind="passwordProps" />
     </Field>
     <div class="w-full flex flex-col gap-2 items-center">
-      <Button @click="onSubmit" class="w-full">Entrar</Button>
-      <Button @click="handleRegister" class="w-full" variant="secondary">Registra-se</Button>
+      <Button @click="handleSubmit" class="w-full" :loading="loading"> Entrar </Button>
+      <Button @click="navigateToSignup" class="w-full" variant="secondary"> Registra-se </Button>
     </div>
   </SignContainer>
 </template>
