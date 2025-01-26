@@ -11,31 +11,47 @@ import { useToast } from 'vue-toastification'
 import { signupSchema } from '@/validations/signup-schema'
 import type { SignupFields } from '@/@types/signup-fields'
 import SignContainer from './ui/SignContainer.vue'
+import { ref } from 'vue'
 
+const toast = useToast()
+const router = useRouter()
+const user = useUserStore()
+const loading = ref<boolean>(false)
 const validationSchema = toTypedSchema(signupSchema)
-
 const { handleSubmit, errors } = useForm({ validationSchema })
 const { value: name } = useField<string>('name')
 const { value: username } = useField<string>('username')
 const { value: email } = useField<string>('email')
 const { value: password } = useField<string>('password')
-const toast = useToast()
-const router = useRouter()
-const user = useUserStore()
+
+async function registerUser(values: SignupFields) {
+  const existingUser = await UserService.getUserByEmail(values.email)
+
+  if (existingUser) {
+    throw new Error('Usuário já cadastrado!')
+  }
+
+  return await UserService.createUser(values)
+}
 
 const onSubmit = handleSubmit(async (values: SignupFields) => {
   try {
-    await UserService.createUser(values)
-    const userCreated = await UserService.getUserByEmail(values.email)
+    loading.value = true
+    const userCreated = await registerUser(values)
 
-    if (!userCreated) return
-
-    toast.success('Cadastro realizado, Bem vindo!')
     user.addUser(userCreated)
 
+    toast.success('Cadastro realizado, Bem vindo!')
     await router.push('/')
   } catch (error) {
-    toast.error(error)
+    loading.value = false
+    if (error instanceof Error) {
+      toast.error(error.message)
+    } else {
+      toast.error('Erro ao realizar cadastro')
+    }
+  } finally {
+    loading.value = false
   }
 })
 
@@ -58,9 +74,19 @@ async function handleSignin(): Promise<void> {
     <Field id="password" label="Password" required :error="errors.password">
       <Input type="password" placeholder="*********" v-model="password" />
     </Field>
-    <div class="w-full flex flex-col gap-1 items-center">
-      <Button @click="onSubmit" class="w-full"> Registrar </Button>
-      <Button @click="handleSignin" class="w-full" intent="secondary"> Entrar </Button>
+    <div class="w-full flex flex-col gap-2 items-center">
+      <Button @click="onSubmit" class="w-full" :loading="loading" v-disabled="loading">
+        Registrar
+      </Button>
+      <Button
+        @click="handleSignin"
+        class="w-full"
+        intent="secondary"
+        :loading="loading"
+        :disabled="loading"
+      >
+        Entrar
+      </Button>
     </div>
   </SignContainer>
 </template>

@@ -9,7 +9,7 @@ const props = defineProps({
 
 <template>
   <div
-    class="flex w-xl bg-gray-50 flex-col gap-5 justify-center items-center shadow-lg p-4 rounded-lg"
+    class="flex w-xl bg-gray-50 flex-col gap-5 justify-center items-center shadow-lg p-5 rounded-lg"
   >
     <img src="/logo.png" alt="Logo Bext" />
     <h2 class="text-center m-2 text-xl font-bold my-2">Gerenciador de tarefas</h2>

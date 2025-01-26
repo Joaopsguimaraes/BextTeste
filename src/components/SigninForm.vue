@@ -12,25 +12,37 @@ import type { SigninFields } from '@/@types/signin-fields'
 import SignContainer from './ui/SignContainer.vue'
 import { signinSchema } from '@/validations/signin-schema'
 
-const validationSchema = toTypedSchema(signinSchema)
-
-const { handleSubmit, errors } = useForm({ validationSchema })
-const { value: email } = useField<string>('email')
-const { value: password } = useField<string>('password')
 const toast = useToast()
 const router = useRouter()
 const user = useUserStore()
+const validationSchema = toTypedSchema(signinSchema)
+const { handleSubmit, errors } = useForm({ validationSchema })
+const { value: email } = useField<string>('email')
+const { value: password } = useField<string>('password')
 
-const onSubmit = handleSubmit(async (values: SigninFields) => {
+async function validadeUser(values: SigninFields) {
   const userSignin = await UserService.getUserByEmail(values.email)
 
   if (!userSignin) {
-    toast.error('Usuário não encontrado, favor registra-se')
-    return
+    throw new Error('Usuário não encontrado, favor registra-se')
   }
 
-  user.addUser(userSignin)
-  await router.push('/')
+  return userSignin
+}
+
+const onSubmit = handleSubmit(async (values: SigninFields) => {
+  try {
+    const userSignin = await validadeUser(values)
+
+    user.addUser(userSignin)
+    await router.push('/')
+  } catch (error) {
+    if (error instanceof Error) {
+      toast.error(error.message)
+    } else {
+      toast.error('Erro ao realizar cadastro')
+    }
+  }
 })
 
 async function handleRegister(): Promise<void> {
@@ -46,7 +58,7 @@ async function handleRegister(): Promise<void> {
     <Field id="password" label="Password" required :error="errors.password">
       <Input type="password" placeholder="*********" v-model="password" />
     </Field>
-    <div class="w-full flex flex-col gap-1 items-center">
+    <div class="w-full flex flex-col gap-2 items-center">
       <Button @click="onSubmit" class="w-full">Entrar</Button>
       <Button @click="handleRegister" class="w-full" intent="secondary">Registra-se</Button>
     </div>

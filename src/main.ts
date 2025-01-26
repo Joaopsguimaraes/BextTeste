@@ -7,10 +7,12 @@ import { createPinia } from 'pinia'
 
 import App from './App.vue'
 import router from './router'
+import LocalStoragePlugin from './stores/local-storage-plugin'
 
 const app = createApp(App)
-
-app.use(createPinia())
+const pinia = createPinia()
+app.use(pinia)
+pinia.use(LocalStoragePlugin)
 app.use(router)
 app.use(Toast)
 
