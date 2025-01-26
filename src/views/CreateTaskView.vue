@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import ActionsTask from '@/components/ActionsTask.vue'
+import CreateTaskForm from '@/components/CreateTaskForm.vue'
 import HeaderApplication from '@/layouts/HeaderApplication.vue'
 </script>
 
 <template>
   <HeaderApplication />
-  <main class="flex flex-col justify-center m-10">
-    <ActionsTask />
+  <main class="flex flex-col justify-center">
+    <CreateTaskForm />
   </main>
 </template>

@@ -1,6 +1,6 @@
 import { computed, ref } from 'vue'
 import { defineStore } from 'pinia'
-import type User from '@/@types/user'
+import type User from '@/types/user'
 
 export const useUserStore = defineStore('user', () => {
   const user = ref<User | null>(null)
@@ -9,6 +9,7 @@ export const useUserStore = defineStore('user', () => {
 
   function addUser(newUser: User) {
     user.value = newUser
+    localStorage.removeItem('user')
   }
 
   function clearUser() {

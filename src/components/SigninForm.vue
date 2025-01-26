@@ -3,14 +3,15 @@ import Input from '@/components/ui/Input.vue'
 import Field from '@/components/ui/Field.vue'
 import Button from '@/components/ui/Button.vue'
 import { useRouter } from 'vue-router'
-import { UserService } from '@/service/http-client'
+import { UserService } from '@/helpers/user-service'
 import { useUserStore } from '@/stores/user'
 import { toTypedSchema } from '@vee-validate/zod'
 import { useForm, useField } from 'vee-validate'
 import { useToast } from 'vue-toastification'
-import type { SigninFields } from '@/@types/signin-fields'
-import SignContainer from './ui/SignContainer.vue'
+import type { SigninFields } from '@/types/signin-fields'
+import SignContainer from '../layouts/SignContainer.vue'
 import { signinSchema } from '@/validations/signin-schema'
+import { RoutesNames } from '@/constants/routes-names-enum'
 
 const toast = useToast()
 const router = useRouter()
@@ -46,7 +47,9 @@ const onSubmit = handleSubmit(async (values: SigninFields) => {
 })
 
 async function handleRegister(): Promise<void> {
-  await router.push('/signup')
+  await router.push({
+    name: RoutesNames.SIGNUP,
+  })
 }
 </script>
 

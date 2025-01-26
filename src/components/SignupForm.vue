@@ -2,16 +2,17 @@
 import Input from '@/components/ui/Input.vue'
 import Field from '@/components/ui/Field.vue'
 import Button from '@/components/ui/Button.vue'
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { UserService } from '@/service/http-client'
+import { UserService } from '@/helpers/user-service'
 import { useUserStore } from '@/stores/user'
 import { toTypedSchema } from '@vee-validate/zod'
 import { useForm, useField } from 'vee-validate'
 import { useToast } from 'vue-toastification'
 import { signupSchema } from '@/validations/signup-schema'
-import type { SignupFields } from '@/@types/signup-fields'
-import SignContainer from './ui/SignContainer.vue'
-import { ref } from 'vue'
+import type { SignupFields } from '@/types/signup-fields'
+import SignContainer from '../layouts/SignContainer.vue'
+import { RoutesNames } from '@/constants/routes-names-enum'
 
 const toast = useToast()
 const router = useRouter()
@@ -42,9 +43,13 @@ const onSubmit = handleSubmit(async (values: SignupFields) => {
     user.addUser(userCreated)
 
     toast.success('Cadastro realizado, Bem vindo!')
-    await router.push('/')
+
+    await router.push({
+      name: RoutesNames.HOME,
+    })
   } catch (error) {
     loading.value = false
+
     if (error instanceof Error) {
       toast.error(error.message)
     } else {
@@ -56,7 +61,9 @@ const onSubmit = handleSubmit(async (values: SignupFields) => {
 })
 
 async function handleSignin(): Promise<void> {
-  await router.push('/signin')
+  await router.push({
+    name: RoutesNames.SIGNIN,
+  })
 }
 </script>
 
@@ -75,16 +82,8 @@ async function handleSignin(): Promise<void> {
       <Input type="password" placeholder="*********" v-model="password" />
     </Field>
     <div class="w-full flex flex-col gap-2 items-center">
-      <Button @click="onSubmit" class="w-full" :loading="loading" v-disabled="loading">
-        Registrar
-      </Button>
-      <Button
-        @click="handleSignin"
-        class="w-full"
-        intent="secondary"
-        :loading="loading"
-        :disabled="loading"
-      >
+      <Button @click="onSubmit" class="w-full" :loading="loading"> Registrar </Button>
+      <Button @click="handleSignin" class="w-full" intent="secondary" :loading="loading">
         Entrar
       </Button>
     </div>
