@@ -5,7 +5,7 @@ import HeaderApplication from '@/layouts/HeaderApplication.vue'
 
 <template>
   <HeaderApplication />
-  <main class="flex flex-col justify-center">
+  <main class="flex flex-col justify-center p-10">
     <CreateTaskForm />
   </main>
 </template>

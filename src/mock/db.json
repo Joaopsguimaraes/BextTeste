@@ -10,5 +10,34 @@
       "updatedAt": "2025-01-26T01:34:48.014Z"
     }
   ],
-  "tasks": []
+  "tasks": [
+    {
+      "id": "6e04",
+      "title": "Estudar Vuex",
+      "priority": 1,
+      "finishAt": "2025-01-27",
+      "category": 3
+    },
+    {
+      "id": "14b2",
+      "title": "Estudar sobre finanças",
+      "priority": 2,
+      "finishAt": "2025-02-26",
+      "category": 1
+    },
+    {
+      "id": "5a81",
+      "title": "Estudar sobre arquitetura no frontend",
+      "priority": 2,
+      "finishAt": "2025-01-27",
+      "category": 2
+    },
+    {
+      "id": "26eb",
+      "title": "Enviar proposta do contrato",
+      "priority": 2,
+      "finishAt": "2025-01-27",
+      "category": 2
+    }
+  ]
 }

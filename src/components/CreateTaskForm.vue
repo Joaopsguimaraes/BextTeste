@@ -12,8 +12,12 @@ import TextArea from './AppTextArea.vue'
 import Select from './AppSelect.vue'
 import { priorityOptions } from '@/constants/priority-options'
 import { categoryOptions } from '@/constants/category-options'
+import type { CreateTaskFields } from '@/types/create-task-fields'
+import { TaskService } from '@/helpers/task-service'
+import { useToast } from 'vue-toastification'
 
 const router = useRouter()
+const toast = useToast()
 const loading = ref<boolean>(false)
 const validationSchema = toTypedSchema(createTaskSchema)
 const { handleSubmit, errors, resetForm } = useForm({ validationSchema })
@@ -23,8 +27,28 @@ const { value: priority } = useField<number>('priority')
 const { value: category } = useField<number>('category')
 const { value: finishAt } = useField<string>('finishAt')
 
-const onSubmit = handleSubmit(async (values: unknown) => {
-  console.log(values)
+const onSubmit = handleSubmit(async (values: CreateTaskFields) => {
+  try {
+    loading.value = true
+
+    await TaskService.createTask(values)
+
+    toast.success('Cadastro realizado, Bem vindo!')
+
+    await router.push({
+      name: RoutesNames.HOME,
+    })
+  } catch (error) {
+    loading.value = false
+
+    if (error instanceof Error) {
+      toast.error(error.message)
+    } else {
+      toast.error('Erro ao realizar cadastro')
+    }
+  } finally {
+    loading.value = false
+  }
 })
 
 async function goBack(): Promise<void> {
@@ -37,7 +61,7 @@ async function goBack(): Promise<void> {
 </script>
 
 <template>
-  <main class="flex flex-col justify-center m-10">
+  <main class="flex flex-col justify-center">
     <div class="w-full flex flex-col md:flex-row md:justify-between gap-2 items-center">
       <span class="text-2xl font-medium text-blue-900">Cadastre uma tarefa</span>
     </div>

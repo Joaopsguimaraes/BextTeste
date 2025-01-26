@@ -1,7 +1,8 @@
 import type { SelectOptionsType } from '@/types/select-options-type'
+import { CategoryValuesEnum } from './category-values-enum'
 
 export const categoryOptions: SelectOptionsType[] = [
-  { value: 1, label: 'Pessoal' },
-  { value: 2, label: 'Trabalho' },
-  { value: 3, label: 'Estudos' },
+  { value: CategoryValuesEnum.PERSONAL, label: 'Pessoal' },
+  { value: CategoryValuesEnum.WORK, label: 'Trabalho' },
+  { value: CategoryValuesEnum.STUDY, label: 'Estudos' },
 ]

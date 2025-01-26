@@ -14,14 +14,12 @@ export const createTaskSchema = z.object({
       invalid_type_error: 'Selecione uma prioridade válida',
     })
     .min(1, { message: 'Prioridade inválida' })
-    .max(3, { message: 'Prioridade inválida' })
-    .optional(),
+    .max(3, { message: 'Prioridade inválida' }),
   finishAt: z.string().optional(),
   category: z
     .number({
       invalid_type_error: 'Selecione uma categoria válida',
     })
     .min(1, { message: 'Categoria inválida' })
-    .max(3, { message: 'Categoria inválida' })
-    .optional(),
+    .max(3, { message: 'Categoria inválida' }),
 })
