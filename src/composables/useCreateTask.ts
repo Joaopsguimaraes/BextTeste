@@ -3,14 +3,14 @@ import { useRouter } from 'vue-router'
 import { useToast } from 'vue-toastification'
 import { TaskService } from '@/helpers/task-service'
 import { RoutesNames } from '@/constants/routes-names-enum'
-import type { CreateTaskFields } from '@/types/create-task-fields'
+import type { CreateTaskInput } from '@/types/create-task-input'
 
 export function useCreateTask() {
   const router = useRouter()
   const toast = useToast()
   const loading = ref(false)
 
-  async function createTask(taskData: CreateTaskFields) {
+  async function createTask(taskData: CreateTaskInput) {
     try {
       loading.value = true
       await TaskService.createTask(taskData)

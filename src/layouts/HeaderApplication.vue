@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { RoutesNames } from '@/constants/routes-names-enum'
 import { useUserStore } from '@/stores/user'
 import { LogOutIcon, UserIcon } from 'lucide-vue-next'
 import { useRouter } from 'vue-router'
@@ -8,7 +9,10 @@ const router = useRouter()
 
 async function signout() {
   user.clearUser()
-  await router.push('/signin')
+
+  await router.push({
+    name: RoutesNames.SIGNIN,
+  })
 }
 </script>
 <template>

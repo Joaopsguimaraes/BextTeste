@@ -21,7 +21,9 @@ const { formatFinishDate, getCategoryLabel, getPriorityLabel, onEdit, task } = p
 </script>
 
 <template>
-  <div class="flex flex-col gap-2 bg-amber-100 rounded-xl p-4 mb-2">
+  <div
+    class="flex flex-col gap-2 bg-amber-100 cursor-pointer hover:bg-amber-200 rounded-xl p-4 mb-2"
+  >
     <div class="flex w-full justify-between items-center">
       <span class="text-lg font-medium">
         {{ task.title }}

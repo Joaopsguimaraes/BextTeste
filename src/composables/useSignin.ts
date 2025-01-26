@@ -3,7 +3,7 @@ import { useRouter } from 'vue-router'
 import { useToast } from 'vue-toastification'
 import { UserService } from '@/helpers/user-service'
 import { useUserStore } from '@/stores/user'
-import type { SigninFields } from '@/types/signin-fields'
+import type { SigninInput } from '@/types/signin-input'
 import { RoutesNames } from '@/constants/routes-names-enum'
 
 export function useSignin() {
@@ -12,7 +12,7 @@ export function useSignin() {
   const userStore = useUserStore()
   const loading = ref(false)
 
-  async function validateUser(values: SigninFields) {
+  async function validateUser(values: SigninInput) {
     const userSignin = await UserService.getUserByEmail(values.email)
 
     if (!userSignin) {
@@ -22,7 +22,7 @@ export function useSignin() {
     return userSignin
   }
 
-  async function signin(values: SigninFields) {
+  async function signin(values: SigninInput) {
     try {
       loading.value = true
       const userSignin = await validateUser(values)

@@ -44,7 +44,7 @@ onMounted(async () => {
   <TaskListHeader />
   <TaskFilters v-model="filters" />
 
-  <div class="flex gap-10 h-full m-5 p-5 bg-white rounded-lg shadow">
+  <div class="flex gap-10 h-full flex-wrap md:flex-nowrap m-5 p-5 bg-white rounded-lg shadow">
     <div
       v-for="category in categoryOptions"
       :key="category.value"

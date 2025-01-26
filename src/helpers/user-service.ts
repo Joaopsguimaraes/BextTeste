@@ -1,9 +1,9 @@
 import type User from '@/types/user'
 import { ApiError, httpClient } from './http-client'
-import type { SignupFields } from '@/types/signup-fields'
+import type { SignupInput } from '@/types/signup-input'
 
-export const UserService = {
-  async getUserByEmail(email: string): Promise<User | null> {
+export class UserService {
+  static async getUserByEmail(email: string): Promise<User | null> {
     try {
       const { data } = await httpClient.get<User[]>(`/users?email=${email}`)
       return data.length > 0 ? data[0] : null
@@ -13,9 +13,9 @@ export const UserService = {
       }
       throw error
     }
-  },
+  }
 
-  async createUser(user: SignupFields): Promise<User> {
+  static async createUser(user: SignupInput): Promise<User> {
     try {
       const { data } = await httpClient.post<User>('/users', user)
       return data
@@ -25,5 +25,5 @@ export const UserService = {
       }
       throw error
     }
-  },
+  }
 }

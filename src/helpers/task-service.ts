@@ -1,9 +1,9 @@
 import type { Task } from '@/types/task'
 import { ApiError, httpClient } from './http-client'
-import type { CreateTaskFields } from '@/types/create-task-fields'
+import type { CreateTaskInput } from '@/types/create-task-input'
 
-export const TaskService = {
-  async createTask(task: CreateTaskFields): Promise<Task> {
+export class TaskService {
+  static async createTask(task: CreateTaskInput): Promise<Task> {
     try {
       const { data } = await httpClient.post<Task>('/tasks', task)
       return data
@@ -13,9 +13,9 @@ export const TaskService = {
       }
       throw error
     }
-  },
+  }
 
-  async getAllTask(): Promise<Task[]> {
+  static async getAllTask(): Promise<Task[]> {
     try {
       const { data } = await httpClient.get<Task[]>('/tasks')
       return data
@@ -25,9 +25,9 @@ export const TaskService = {
       }
       throw error
     }
-  },
+  }
 
-  async getTaskById(id: Task['id']): Promise<Task> {
+  static async getTaskById(id: Task['id']): Promise<Task> {
     try {
       const { data } = await httpClient.get<Task>(`/tasks/${id}`)
       return data
@@ -37,9 +37,9 @@ export const TaskService = {
       }
       throw error
     }
-  },
+  }
 
-  async updateTask(id: string, taskData: CreateTaskFields): Promise<Task> {
+  static async updateTask(id: string, taskData: CreateTaskInput): Promise<Task> {
     try {
       const { data } = await httpClient.put<Task>(`/tasks/${id}`, taskData)
 
@@ -50,16 +50,17 @@ export const TaskService = {
       }
       throw error
     }
-  },
+  }
 
-  async deleteTask(id: Task['id']): Promise<void> {
+  static async deleteTask(id: Task['id']): Promise<void> {
     try {
       await httpClient.delete(`/tasks/${id}`)
     } catch (error) {
+      console.error(error)
       if (error instanceof ApiError) {
         console.error(`API Error: ${error.message}`)
       }
       throw error
     }
-  },
+  }
 }

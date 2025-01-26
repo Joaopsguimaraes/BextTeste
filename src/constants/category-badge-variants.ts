@@ -1,5 +1,5 @@
 export const categoryBadgeVariants = {
-  1: 'info', // Estudo
-  2: 'warning', // Trabalho
-  3: 'success', // Pessoal
+  1: 'info',
+  2: 'warning',
+  3: 'success',
 }

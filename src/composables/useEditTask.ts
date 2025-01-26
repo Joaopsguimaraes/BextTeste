@@ -4,7 +4,7 @@ import { useRouter } from 'vue-router'
 import { useToast } from 'vue-toastification'
 import { TaskService } from '@/helpers/task-service'
 import { RoutesNames } from '@/constants/routes-names-enum'
-import type { CreateTaskFields } from '@/types/create-task-fields'
+import type { CreateTaskInput } from '@/types/create-task-input'
 import type { Task } from '@/types/task'
 
 export function useEditTask() {
@@ -28,7 +28,7 @@ export function useEditTask() {
     }
   }
 
-  async function updateTask(taskData: CreateTaskFields) {
+  async function updateTask(taskData: CreateTaskInput) {
     if (!task.value) return
 
     try {

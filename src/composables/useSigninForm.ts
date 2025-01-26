@@ -1,12 +1,12 @@
 import { toTypedSchema } from '@vee-validate/zod'
 import { useForm } from 'vee-validate'
 import { signinSchema } from '@/validations/signin-schema'
-import type { SigninFields } from '@/types/signin-fields'
+import type { SigninInput } from '@/types/signin-input'
 
-export function useSigninForm(onSubmit: (values: SigninFields) => Promise<void>) {
+export function useSigninForm(onSubmit: (values: SigninInput) => Promise<void>) {
   const validationSchema = toTypedSchema(signinSchema)
 
-  const form = useForm<SigninFields>({
+  const form = useForm<SigninInput>({
     validationSchema,
   })
 

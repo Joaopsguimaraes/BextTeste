@@ -3,7 +3,7 @@ import { useRouter } from 'vue-router'
 import { useToast } from 'vue-toastification'
 import { UserService } from '@/helpers/user-service'
 import { useUserStore } from '@/stores/user'
-import type { SignupFields } from '@/types/signup-fields'
+import type { SignupInput } from '@/types/signup-input'
 import { RoutesNames } from '@/constants/routes-names-enum'
 
 export function useSignup() {
@@ -12,7 +12,7 @@ export function useSignup() {
   const userStore = useUserStore()
   const loading = ref(false)
 
-  async function registerUser(values: SignupFields) {
+  async function registerUser(values: SignupInput) {
     const existingUser = await UserService.getUserByEmail(values.email)
 
     if (existingUser) {
@@ -23,7 +23,7 @@ export function useSignup() {
     return userCreated
   }
 
-  async function signup(values: SignupFields) {
+  async function signup(values: SignupInput) {
     try {
       loading.value = true
 

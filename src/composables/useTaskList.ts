@@ -4,9 +4,11 @@ import { TaskService } from '@/helpers/task-service'
 import type { Task } from '@/types/task'
 import { categoryOptions } from '@/constants/category-options'
 import { priorityOptions } from '@/constants/priority-options'
+import { useToast } from 'vue-toastification'
 
 export function useTaskList() {
   const tasks = ref<Task[]>([])
+  const toast = useToast()
   const filters = ref({
     categoryFilter: null as number | null,
     priorityFilter: null as number | null,
@@ -14,7 +16,13 @@ export function useTaskList() {
   })
 
   async function fetchTasks() {
-    tasks.value = await TaskService.getAllTask()
+    try {
+      tasks.value = await TaskService.getAllTask()
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Erro ao lista de tarefas'
+
+      toast.error(errorMessage)
+    }
   }
 
   const filteredTasks = computed(() => {

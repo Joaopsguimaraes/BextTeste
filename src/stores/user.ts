@@ -9,11 +9,11 @@ export const useUserStore = defineStore('user', () => {
 
   function addUser(newUser: User) {
     user.value = newUser
-    localStorage.removeItem('user')
   }
 
   function clearUser() {
     user.value = null
+    localStorage.removeItem('user')
   }
 
   return { user, addUser, clearUser, isAuthenticated }

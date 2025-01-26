@@ -12,41 +12,26 @@
   ],
   "tasks": [
     {
-      "id": "6e04",
-      "title": "Estudar Vuex",
-      "priority": 3,
+      "title": "tarefa 1",
+      "description": "",
+      "priority": 1,
+      "finishAt": "2025-01-31",
+      "category": 1,
+      "id": "e6c4"
+    },
+    {
+      "id": "3484",
+      "title": "Tarefa 2",
+      "priority": 2,
       "finishAt": "2025-01-27",
       "category": 3
     },
     {
-      "id": "4f6d",
-      "title": "Criar documentação",
+      "id": "2f63",
+      "title": "Tarefa 3",
       "priority": 1,
       "finishAt": "2025-01-29",
       "category": 2
-    },
-    {
-      "id": "1c96",
-      "title": "Estudar composables",
-      "priority": 3,
-      "finishAt": "2025-01-30",
-      "category": 3
-    },
-    {
-      "title": "Criar os testes de unidade com vitest",
-      "description": "",
-      "priority": 2,
-      "finishAt": "2025-01-28",
-      "category": 2,
-      "id": "1255"
-    },
-    {
-      "title": "Matricular no inglês",
-      "description": "",
-      "priority": 2,
-      "finishAt": "",
-      "category": 1,
-      "id": "4262"
     }
   ]
 }

@@ -1,5 +1,5 @@
 export const priorityBadgeVariants = {
-  1: 'info', // Baixa
-  2: 'warning', // Média
-  3: 'danger', // Alta
+  1: 'info',
+  2: 'warning',
+  3: 'danger',
 }
