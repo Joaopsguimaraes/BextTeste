@@ -51,4 +51,15 @@ export const TaskService = {
       throw error
     }
   },
+
+  async deleteTask(id: Task['id']): Promise<void> {
+    try {
+      await httpClient.delete(`/tasks/${id}`)
+    } catch (error) {
+      if (error instanceof ApiError) {
+        console.error(`API Error: ${error.message}`)
+      }
+      throw error
+    }
+  },
 }

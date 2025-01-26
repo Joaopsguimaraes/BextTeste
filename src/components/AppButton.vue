@@ -2,7 +2,7 @@
 import { computed, type PropType } from 'vue'
 import { cva } from 'class-variance-authority'
 
-export type ButtonVariants = 'primary' | 'secondary' | 'text'
+export type ButtonVariants = 'primary' | 'secondary' | 'text' | 'icon'
 
 const props = defineProps({
   leftIcon: Object,
@@ -15,27 +15,25 @@ const props = defineProps({
   },
   variant: {
     type: String as PropType<ButtonVariants>,
-    validator: (val: string) => ['primary', 'secondary', 'text'].includes(val),
+    validator: (val: string) => ['primary', 'secondary', 'text', 'icon'].includes(val),
     default: 'primary',
   },
 })
 
 const buttonClass = computed(() => {
-  return cva(
-    'min-w-32 p-2 inline-flex gap-4 items-center justify-center rounded-lg cursor-pointer',
-    {
-      variants: {
-        variant: {
-          primary: 'bg-gray-900 hover:bg-gray-800 text-white',
-          secondary: 'bg-none hover:bg-gray-100 text-gray-900 border border-gray-900',
-          text: 'text-gray-900 hover:bg-gray-100',
-        },
-        disabled: {
-          true: '!bg-gray-100 !text-gray-400 !cursor-not-allowed',
-        },
+  return cva('p-2 inline-flex gap-4 items-center justify-center rounded-lg cursor-pointer', {
+    variants: {
+      variant: {
+        primary: 'min-w-32 bg-gray-900 hover:bg-gray-800 text-white',
+        secondary: 'min-w-32 bg-none hover:bg-gray-100 text-gray-900 border border-gray-900',
+        text: 'min-w-32 text-gray-900 hover:bg-gray-100',
+        icon: 'text-gray-900 hover:bg-gray-100 rounded-md p-4',
+      },
+      disabled: {
+        true: '!bg-gray-100 !text-gray-400 !cursor-not-allowed',
       },
     },
-  )({
+  })({
     variant: props.variant,
     disabled: props.disabled,
   })

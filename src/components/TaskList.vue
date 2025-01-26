@@ -7,6 +7,8 @@ import TaskFilters from '@/components/TaskFilters.vue'
 import BaseCardTask from '@/components/BaseCardTask.vue'
 import { categoryOptions } from '@/constants/category-options'
 import { useTaskList } from '@/composables/useTaskList'
+import { useRemoveTask } from '@/composables/useRemoveTask'
+import type { Task } from '@/types/task'
 
 const router = useRouter()
 
@@ -18,11 +20,18 @@ const {
   getPriorityLabel,
   formatFinishDate,
 } = useTaskList()
+const { removeTask } = useRemoveTask()
 
 async function goEditTask(id: string) {
   await router.push({
     name: RoutesNames.TASK_EDIT,
     params: { id },
+  })
+}
+
+function handleRemoveTask(id: Task['id']) {
+  removeTask(id, async () => {
+    await fetchTasks()
   })
 }
 
@@ -51,6 +60,7 @@ onMounted(async () => {
           :key="task.id"
           :task="task"
           :on-edit="goEditTask"
+          :on-remove="handleRemoveTask"
           :get-category-label="getCategoryLabel"
           :get-priority-label="getPriorityLabel"
           :format-finish-date="formatFinishDate"
